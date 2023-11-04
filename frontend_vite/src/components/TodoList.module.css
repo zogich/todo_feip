@@ -1,0 +1,7 @@
+.listBody{
+    margin-left: 5em;
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
