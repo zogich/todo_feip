@@ -3,6 +3,7 @@ import styles from './styles/TodoItem.module.css'
 import { useState } from 'react'
 import DropDownList from  './DropdownList.tsx'
 import {Link} from "react-router-dom";
+import api from "../api";
 
 function todoItem(prop: { taskProp: Task }){
 
@@ -11,6 +12,10 @@ function todoItem(prop: { taskProp: Task }){
     {id: 2, name: "Subtask 2", description: 'Koool', parent_task: null},
     {id: 3, name: "Subtask 3", description: 'KEKW', parent_task: null}
     ]);
+
+    async function deleteTask(){
+        await api.delete(`api/todo/${prop.taskProp.id}`)
+    }
 
     return <>
         <div className={styles.card}>
@@ -28,7 +33,7 @@ function todoItem(prop: { taskProp: Task }){
             </div>
             <div className={styles.actionBlock}>
                 <button>Change</button>
-                <button>Delete</button>
+                <button onClick={deleteTask}>Delete</button>
             </div>
 
         </div>

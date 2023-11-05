@@ -1,15 +1,15 @@
 import { useState } from "react";
 import api from "../api";
-import Task from "../models/task";
+import styles from "./styles/CreateTodoComponent.module.css"
+
 function CreateTodoComponent(){
     const [ todoName, setName ]= useState('');
     const [ todoDescription, setDescription ]= useState('');
+    const [isOpen, setIsOpen] = useState(false);
 
     function handleSubmit(){
         api.post('/api/todo', {name: todoName, description: todoDescription},
-            ).then(
-            response => console.log(response)
-        ).catch(error => console.log(error))
+            ).catch(error => console.log(error))
     }
     function handleChangeName(e){
         setName(e.target.value)
@@ -18,14 +18,20 @@ function CreateTodoComponent(){
     function handleChangeDesctiption(e){
         setDescription(e.target.value)
     }
+    let widget;
+    if ( isOpen ) {
+        widget =  <div className={styles.componentWrapper}>
 
-    return (
-        <div>
-            <input type={"text"} value={todoName} onChange={handleChangeName}/>
-            <input type={"text"} value={todoDescription} onChange={handleChangeDesctiption}/>
-            <input type={"button"} onClick={handleSubmit}/>
-        </div>
-    )
+                <button  onClick={() =>setIsOpen(!isOpen)}>Close</button>
+                <input type={"text"} value={todoName} placeholder={'Имя'} onChange={handleChangeName}/>
+                <input type={"text"} value={todoDescription} placeholder={'Описание'} onChange={handleChangeDesctiption}/>
+                <button onClick={handleSubmit}>Ok</button>
+            </div>
+    }
+    const openButton = <div className={styles.componentWrapper}><button onClick={() => setIsOpen(!isOpen)}>Add task</button></div>
+
+
+    return isOpen ? widget : openButton
 }
 
-export default CreateTodoComponent
+export default CreateTodoComponent;
