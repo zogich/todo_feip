@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { TodoEntity } from './todo.entity.ts';
+import { TodoEntity } from './todo.entity';
 
 @Injectable()
 export class TodoService {
@@ -14,8 +14,9 @@ export class TodoService {
     return this.todoRepository.find();
   }
 
-  create(data: TodoEntity): void {
-    this.todoRepository.create(data)
+  create(data: TodoEntity): Promise<TodoEntity> {
+    const todo = this.todoRepository.create(data)
+    return this.todoRepository.save(todo)
   }
 
   findOne(id: number): Promise<TodoEntity | null> {

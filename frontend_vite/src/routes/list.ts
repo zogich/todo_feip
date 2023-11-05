@@ -1,21 +1,8 @@
-
-export function fetchByUser(){
-    return [
-        {id: 1, name: "Task 1", description: 'KEKW', parent_task: null},
-        {id: 2, name: "Task 2", description: 'Koool', parent_task: null},
-        {id: 3, name: "Task 3", description: 'KEKW', parent_task: null},
-        {id: 1, name: "Task 1", description: 'KEKW', parent_task: null},
-        {id: 2, name: "Task 2", description: 'Koool', parent_task: null},
-        {id: 3, name: "Task 3", description: 'KEKW', parent_task: null},
-        {id: 1, name: "Task 1", description: 'KEKW', parent_task: null},
-        {id: 2, name: "Task 2", description: 'Koool', parent_task: null},
-        {id: 3, name: "Task 3", description: 'KEKW', parent_task: null},
-        {id: 1, name: "Task 1", description: 'KEKW', parent_task: null},
-        {id: 2, name: "Task 2", description: 'Koool', parent_task: null},
-    ]
-}
+import api from "../api";
 
 
-export function listLoader() {
-    return fetchByUser()
+
+export async function listLoader() {
+    const response = await api.get('/api/todo')
+    return response.data
 }

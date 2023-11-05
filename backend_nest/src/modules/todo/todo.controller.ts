@@ -14,7 +14,7 @@ export class TodoController {
   }
 
   @Post()
-  createTodo(@Body todo: TodoEntity): void {
+  createTodo(@Body() todo: TodoEntity): Promise<TodoEntity> {
       return this.TodoService.create(todo)
   }
 }

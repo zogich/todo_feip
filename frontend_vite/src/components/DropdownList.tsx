@@ -1,6 +1,6 @@
 import Task from "../models/task";
 import { useState } from 'react'
-import styles from "./DropdownList.module.css"
+import styles from "./styles/DropdownList.module.css"
 
 function dropdownList(prop: {subtasksProp: Task[]}){
     const [isHidden, setValue] = useState(true);
