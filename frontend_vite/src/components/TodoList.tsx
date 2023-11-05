@@ -7,7 +7,6 @@ import CreateTodoComponent from "./CreateTodoComponent";
 
 function TodoList(){
     const todoList  = useLoaderData();
-
     const items = todoList.map(element => <TodoItem key={element.id} taskProp={element} />)
     return <>
         <div>

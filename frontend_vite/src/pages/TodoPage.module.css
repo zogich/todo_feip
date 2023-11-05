@@ -1,0 +1,20 @@
+.wrapper{
+    margin: 20px;
+    width: 60%;
+}
+.name{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+    font-size: 5em;
+    border-bottom: 4px solid white;
+}
+.description{
+    display: flex;
+    background: rgba(255, 255, 255, 0.1);
+    align-items: center;
+    padding: 3px 3px 3px 10px;
+    margin-top: 10px;
+    font-size: 2em;
+}
