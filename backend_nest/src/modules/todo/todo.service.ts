@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { TodoEntity } from './todo.entity';
+import {IsNull} from "typeorm"
 
 @Injectable()
 export class TodoService {
@@ -12,6 +13,10 @@ export class TodoService {
 
   findAll(): Promise<TodoEntity[]> {
     return this.todoRepository.find();
+  }
+
+  findRootTasks(): Promise<TodoEntity[]> {
+    return this.todoRepository.findBy({parentTask:  IsNull()});
   }
 
   findByParentId(parent_id: number): Promise<TodoEntity[]> {

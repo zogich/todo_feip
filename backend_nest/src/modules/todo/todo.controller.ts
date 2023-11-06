@@ -16,7 +16,7 @@ export class TodoController {
 
   @Get()
   getAllTodo(): Promise<TodoEntity[]> {
-    return this.TodoService.findAll()
+    return this.TodoService.findRootTasks()
   }
 
   @Get(':id')

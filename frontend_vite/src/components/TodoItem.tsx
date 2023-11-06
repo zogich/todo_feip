@@ -1,21 +1,25 @@
 import Task from '../models/task.ts'
 import styles from './styles/TodoItem.module.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import DropDownList from  './DropdownList.tsx'
 import {Link} from "react-router-dom";
 import api from "../api";
 
 function todoItem(prop: { taskProp: Task }){
 
-    const [subtasks, setSubtasks] = useState([
-    {id: 1, name: "Subtask 1", description: 'KEKW', parent_task: null},
-    {id: 2, name: "Subtask 2", description: 'Koool', parent_task: null},
-    {id: 3, name: "Subtask 3", description: 'KEKW', parent_task: null}
-    ]);
+    const [subtasks, setSubtasks] = useState([]);
 
     async function deleteTask(){
         await api.delete(`api/todo/${prop.taskProp.id}`)
     }
+
+    async function getSubtasks(){
+        await api.get('api/todo/byparent', {params:{parent_id: prop.taskProp}}).then(response=>{
+            setSubtasks(response.data)
+        }).catch(error => console.log(error))
+    }
+
+    useEffect(() => {getSubtasks()}, [])
 
     return <>
         <div className={styles.card}>
