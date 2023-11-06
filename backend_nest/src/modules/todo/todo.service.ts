@@ -14,6 +14,10 @@ export class TodoService {
     return this.todoRepository.find();
   }
 
+  findByParentId(parent_id: number): Promise<TodoEntity[]> {
+    return this.todoRepository.findBy({parentTask : parent_id})
+  }
+
   create(data: TodoEntity): Promise<TodoEntity> {
     const todo = this.todoRepository.create(data)
     return this.todoRepository.save(todo)

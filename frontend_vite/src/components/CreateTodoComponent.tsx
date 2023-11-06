@@ -2,13 +2,14 @@ import { useState } from "react";
 import api from "../api";
 import styles from "./styles/CreateTodoComponent.module.css"
 
-function CreateTodoComponent(){
+
+function CreateTodoComponent({parent_task = null}){
     const [ todoName, setName ]= useState('');
     const [ todoDescription, setDescription ]= useState('');
     const [isOpen, setIsOpen] = useState(false);
 
     function handleSubmit(){
-        api.post('/api/todo', {name: todoName, description: todoDescription},
+        api.post('/api/todo', {name: todoName, description: todoDescription, parentTask: parent_task},
             ).catch(error => console.log(error))
     }
     function handleChangeName(e){
