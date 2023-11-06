@@ -1,6 +1,7 @@
-import { Controller, Get, Body, Post, Param, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Body, Post, Param, Delete, Query, Patch } from '@nestjs/common';
 import { TodoEntity } from "./todo.entity";
 import { TodoService } from "./todo.service";
+import { UpdateResult } from "typeorm";
 
 @Controller('api/todo')
 export class TodoController {
@@ -27,6 +28,11 @@ export class TodoController {
   @Delete(':id')
   deleteOneById(@Param('id') id: string) : Promise<void>{
     return this.TodoService.remove(parseInt(id))
+  }
+
+  @Patch(':id')
+  updateOneById( @Body() body: TodoEntity) : Promise<UpdateResult> {
+    return this.TodoService.updateOne(body)
   }
 
 

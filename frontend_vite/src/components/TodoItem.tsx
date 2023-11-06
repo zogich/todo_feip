@@ -14,7 +14,7 @@ function todoItem(prop: { taskProp: Task }){
     }
 
     async function getSubtasks(){
-        await api.get('api/todo/byparent', {params:{parent_id: prop.taskProp}}).then(response=>{
+        await api.get('api/todo/byparent', {params:{parent_id: prop.taskProp.id}}).then(response=>{
             setSubtasks(response.data)
         }).catch(error => console.log(error))
     }

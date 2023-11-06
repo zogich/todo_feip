@@ -1,21 +1,16 @@
 import { useEffect, useState } from "react";
 import api from "../api";
+import Task from "../models/task";
 import CreateTodoComponent from "./CreateTodoComponent";
+import { Link } from "react-router-dom";
 
 
-function SubtaskList( prop: {parentTaskId: number}){
-    const [subtasks, setSubtasks] = useState([])
+function SubtaskList( prop: {subtasks: Task[], parentTaskId}){
 
-    async function fetchSubtasks(){
-        await api.get('/api/todo/byparent', {params: {parent_id: prop.parentTaskId}}).then(response =>
-            setSubtasks(response.data)
-        )
-    }
-
-    useEffect(() => { fetchSubtasks() }, [])
-
-    const list = subtasks.map(element => <div key={element.id}>
+    const list = prop.subtasks.map(element => <div key={element.id}>
+            <Link to={`/item/${element.id}`}>
             {element.name}
+            </Link>
         </div>)
     return <>
         <CreateTodoComponent parent_task={prop.parentTaskId}/>

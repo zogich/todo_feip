@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import TodoList from './components/TodoList.tsx'
 import { listLoader } from "./routes/list";
-import { pageLoaderById } from "./routes/todopage";
+import { pageLoader } from "./routes/todopage";
 import './index.css';
 import TodoPage from './pages/TodoPage.tsx';
 import {
@@ -24,7 +24,7 @@ const router = createBrowserRouter([
       {
         path: "/item/:id",
         element: <TodoPage/>,
-        loader: pageLoaderById
+        loader: pageLoader
       }
     ]
   },

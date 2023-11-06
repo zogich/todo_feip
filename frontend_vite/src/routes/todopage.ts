@@ -1,6 +1,6 @@
 import api from "../api";
 
-export async function pageLoaderById({ params }){
-    const response = await api.get(`api/todo/${params.id}`, )
-    return response.data
+export async function pageLoader({ params }){
+    const response_todo = await api.get(`api/todo/${params.id}`, )
+    return response_todo.data
 }

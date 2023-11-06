@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, UpdateResult } from 'typeorm';
 import { TodoEntity } from './todo.entity';
 import {IsNull} from "typeorm"
 
@@ -26,6 +26,11 @@ export class TodoService {
   create(data: TodoEntity): Promise<TodoEntity> {
     const todo = this.todoRepository.create(data)
     return this.todoRepository.save(todo)
+  }
+
+  updateOne(data: TodoEntity) : Promise<UpdateResult>{
+    const todo = this.todoRepository.create(data)
+    return this.todoRepository.update(todo.id, todo)
   }
 
   findOne(id: number): Promise<TodoEntity | null> {
