@@ -6,10 +6,14 @@ import { listLoader } from "./routes/list";
 import { pageLoader } from "./routes/todopage";
 import './index.css';
 import TodoPage from './pages/TodoPage.tsx';
+import LoginPage from "./pages/LoginPage";
+
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+
+import RegisterPage from "./pages/RegisterPage";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +32,14 @@ const router = createBrowserRouter([
       }
     ]
   },
+  {
+    path: "/register",
+    element: <RegisterPage/>
+  },
+  {
+    path: "/login",
+    element: <LoginPage/>
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

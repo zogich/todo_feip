@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { Repository, IsNull } from 'typeorm';
 import { InjectRepository } from "@nestjs/typeorm";
 import {UserEntity} from "./user.entity"
@@ -15,6 +15,10 @@ export class UserService {
     }
 
     async create(payload: {username: string, password: string}){
+        const existUser = await this.userRepository.findOneBy({username: payload.username})
+        if (existUser) {
+            throw new BadRequestException('USERNAME ALREADY EXISTS')
+        }
         const new_user = this.userRepository.create(payload)
         return await this.userRepository.save(new_user);
     }
