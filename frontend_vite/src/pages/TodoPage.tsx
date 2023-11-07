@@ -36,7 +36,7 @@ export default function TodoPage(){
     function handleChangeDescription(e){
         setEditTodoItem({...editTodoItem, description: e.target.value })
     }
-    function handleChangeIsDone(e){
+    function handleChangeIsDone(){
         setEditTodoItem({...editTodoItem, isDone: !editTodoItem.isDone})
     }
 

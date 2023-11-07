@@ -24,7 +24,7 @@ export default function Header(){
         else{
             setNavButton(<></>)
         }
-    }, [routeParams])
+    }, [routeParams, store.current_task])
     return (
             <div className={style.cap}>
                 {navButton}

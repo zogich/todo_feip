@@ -1,44 +1,51 @@
-import { Controller, Get, Body, Post, Param, Delete, Query, Patch } from '@nestjs/common';
-import { TodoEntity } from "./todo.entity";
-import { TodoService } from "./todo.service";
-import { UpdateResult } from "typeorm";
+import {
+  Controller,
+  Get,
+  Body,
+  Post,
+  Param,
+  Delete,
+  Query,
+  Patch,
+} from '@nestjs/common';
+import { TodoEntity } from './todo.entity';
+import { TodoService } from './todo.service';
+import { type UpdateResult } from 'typeorm';
 
 @Controller('api/todo')
 export class TodoController {
+  constructor(private readonly TodoService: TodoService) {}
 
-  constructor(private readonly TodoService: TodoService) {
-  }
-
-  //Why do i cant write this after :id routes
+  // Why do i cant write this after :id routes
   @Get('/byparent')
-  getByParent(@Query('parent_id') parent_id: string) : Promise<TodoEntity[]> {
-    return this.TodoService.findByParentId(parseInt(parent_id))
+  async getByParent(
+    @Query('parent_id') parentId: string,
+  ): Promise<TodoEntity[]> {
+    return await this.TodoService.findByParentId(parseInt(parentId));
   }
 
   @Get()
-  getAllTodo(): Promise<TodoEntity[]> {
-    return this.TodoService.findRootTasks()
+  async getAllTodo(): Promise<TodoEntity[]> {
+    return await this.TodoService.findRootTasks();
   }
 
   @Get(':id')
-  getOneTodo(@Param('id') id: string) : Promise<TodoEntity | null>{
-    return this.TodoService.findOne(parseInt(id))
+  async getOneTodo(@Param('id') id: string): Promise<TodoEntity | null> {
+    return await this.TodoService.findOne(parseInt(id));
   }
 
   @Delete(':id')
-  deleteOneById(@Param('id') id: string) : Promise<void>{
-    return this.TodoService.remove(parseInt(id))
+  async deleteOneById(@Param('id') id: string): Promise<void> {
+    await this.TodoService.remove(parseInt(id));
   }
 
   @Patch(':id')
-  updateOneById( @Body() body: TodoEntity) : Promise<UpdateResult> {
-    return this.TodoService.updateOne(body)
+  async updateOneById(@Body() body: TodoEntity): Promise<UpdateResult> {
+    return await this.TodoService.updateOne(body);
   }
-
 
   @Post()
-  createTodo(@Body() todo: TodoEntity): Promise<TodoEntity> {
-      return this.TodoService.create(todo)
+  async createTodo(@Body() todo: TodoEntity): Promise<TodoEntity> {
+    return await this.TodoService.create(todo);
   }
-
 }

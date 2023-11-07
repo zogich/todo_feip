@@ -5,7 +5,7 @@ import DropDownList from  './DropdownList.tsx'
 import {Link} from "react-router-dom";
 import api from "../api";
 
-function todoItem(prop: { taskProp: Task }){
+function TodoItem(prop: { taskProp: Task }){
 
     const [subtasks, setSubtasks] = useState([]);
 
@@ -19,7 +19,7 @@ function todoItem(prop: { taskProp: Task }){
         }).catch(error => console.log(error))
     }
 
-    useEffect(() => {getSubtasks()}, [])
+    useEffect(() => {getSubtasks()}, [getSubtasks])
 
     return <>
         <div className={styles.card}>
@@ -44,4 +44,4 @@ function todoItem(prop: { taskProp: Task }){
     </>
 }
 
-export default todoItem
+export default TodoItem

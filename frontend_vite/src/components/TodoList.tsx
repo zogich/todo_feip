@@ -5,7 +5,6 @@ import { useLoaderData } from "react-router-dom";
 import CreateTodoComponent from "./CreateTodoComponent";
 import { useStore } from "effector-react";
 import $todoStore, { setTodoList, setCurrentTask } from "../stores/todo";
-import api from "../api";
 
 
 function TodoList(){

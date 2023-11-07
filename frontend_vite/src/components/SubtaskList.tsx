@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-import api from "../api";
 import Task from "../models/task";
 import CreateTodoComponent from "./CreateTodoComponent";
 import { Link } from "react-router-dom";

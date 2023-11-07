@@ -1,40 +1,39 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, UpdateResult } from 'typeorm';
+import { Repository, type UpdateResult, IsNull } from 'typeorm';
 import { TodoEntity } from './todo.entity';
-import {IsNull} from "typeorm"
 
 @Injectable()
 export class TodoService {
   constructor(
     @InjectRepository(TodoEntity)
-    private todoRepository: Repository<TodoEntity>,
+    private readonly todoRepository: Repository<TodoEntity>,
   ) {}
 
-  findAll(): Promise<TodoEntity[]> {
-    return this.todoRepository.find();
+  async findAll(): Promise<TodoEntity[]> {
+    return await this.todoRepository.find();
   }
 
-  findRootTasks(): Promise<TodoEntity[]> {
-    return this.todoRepository.findBy({parentTask:  IsNull()});
+  async findRootTasks(): Promise<TodoEntity[]> {
+    return await this.todoRepository.findBy({ parentTask: IsNull() });
   }
 
-  findByParentId(parent_id: number): Promise<TodoEntity[]> {
-    return this.todoRepository.findBy({parentTask : parent_id})
+  async findByParentId(parentId: number): Promise<TodoEntity[]> {
+    return await this.todoRepository.findBy({ parentTask: parentId });
   }
 
-  create(data: TodoEntity): Promise<TodoEntity> {
-    const todo = this.todoRepository.create(data)
-    return this.todoRepository.save(todo)
+  async create(data: TodoEntity): Promise<TodoEntity> {
+    const todo = this.todoRepository.create(data);
+    return await this.todoRepository.save(todo);
   }
 
-  updateOne(data: TodoEntity) : Promise<UpdateResult>{
-    const todo = this.todoRepository.create(data)
-    return this.todoRepository.update(todo.id, todo)
+  async updateOne(data: TodoEntity): Promise<UpdateResult> {
+    const todo = this.todoRepository.create(data);
+    return await this.todoRepository.update(todo.id, todo);
   }
 
-  findOne(id: number): Promise<TodoEntity | null> {
-    return this.todoRepository.findOneBy({ id });
+  async findOne(id: number): Promise<TodoEntity | null> {
+    return await this.todoRepository.findOneBy({ id });
   }
 
   async remove(id: number): Promise<void> {

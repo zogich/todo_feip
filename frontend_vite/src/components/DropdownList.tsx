@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Link } from "react-router-dom";
 import styles from "./styles/DropdownList.module.css"
 
-function dropdownList(prop: {subtasksProp: Task[]}){
+function DropdownList(prop: {subtasksProp: Task[]}){
     const [isHidden, setValue] = useState(true);
     const subtasksList = prop.subtasksProp.map(element =>
         <div key={element.id} className={styles.item}>
@@ -16,4 +16,4 @@ function dropdownList(prop: {subtasksProp: Task[]}){
     return isHidden ? openListButton : <><button className={styles.dropdownButton} onClick={() => setValue(!isHidden)}>-</button> {subtasksList}</>
 }
 
-export default dropdownList
+export default DropdownList
