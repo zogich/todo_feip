@@ -5,12 +5,14 @@ import SubtaskList from '../components/SubtaskList.tsx'
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import api from "../api";
-import { setTodoList } from "../stores/todo";
+import { setCurrentTask } from "../stores/todo";
 
 export default function TodoPage(){
-    const routeParams = useParams()
+    const routeParams = useParams();
 
     let todoItem: Task = useLoaderData() as Task;
+    setCurrentTask(todoItem)
+
     const [editTodoItem, setEditTodoItem]: Task = useState(todoItem);
     const [subtasks, setSubtasks]: Task = useState([]);
 

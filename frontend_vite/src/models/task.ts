@@ -1,7 +1,7 @@
 
 interface Task{
     id: number;
-    parent_task: number | null;
+    parentTask: number | null;
     name: string;
     description: string;
     isDone: boolean;
