@@ -14,7 +14,11 @@ function RegisterPage(){
     }
 
     async function signUP(){
-        await api.post('/auth/signup', {username: login, password: password}).then(response => console.log(response)).catch(error=>{
+        await api.post('/auth/signup', {username: login, password: password}).then(response => {
+            localStorage.setItem('access', response.data.access)
+            localStorage.setItem('refresh', response.data.refresh)
+        })
+        .catch(error=>{
             console.log(error)
         })
     }

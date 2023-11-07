@@ -21,7 +21,21 @@ export class AuthService {
   async login(user: any) {
     const payload = { username: user.username, sub: user.userId };
     return {
-      access_token: this.jwtService.sign(payload),
+      access: this.jwtService.sign(payload),
+      refresh: this.jwtService.sign(payload, {expiresIn: '7d'})
     };
   }
+
+  verifyToken(token: string){
+    return this.jwtService.verify(token)
+  }
+
+  async refresh(user: any) {
+    const payload = { username: user.username, sub: user.userId };
+    return {
+      access: this.jwtService.sign(payload),
+    };
+  }
+
+  //BlacklistToken
 }
