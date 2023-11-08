@@ -28,7 +28,6 @@ export default function TodoPage(){
 
 
 
-
     function handleChangeName(e){
         setEditTodoItem({...editTodoItem, name: e.target.value})
     }
@@ -52,15 +51,17 @@ export default function TodoPage(){
     function isChanged(){
         if (  todoItem.name != editTodoItem.name || todoItem.description != editTodoItem.description
         || todoItem.isDone != editTodoItem.isDone){
-            return <button onClick={updateTask}>Update</button>
+            return <button className={styles.updateButton} onClick={updateTask}>Update</button>
         }
         return null
     }
 
 
     return <div className={styles.wrapper}>
-        <input type={"checkbox"} checked={editTodoItem.isDone} onChange={handleChangeIsDone}/>
-        <input type={"text"} className={styles.name} value={editTodoItem.name} onChange={handleChangeName}/>
+        <div className={styles.name}>
+            <input type={"checkbox"} checked={editTodoItem.isDone} onChange={handleChangeIsDone}/>
+            <input type={"text"} value={editTodoItem.name} onChange={handleChangeName}/>
+        </div>
         <input type={"text"} className={styles.description} value={editTodoItem.description} onChange={handleChangeDescription} />
         {isChanged()}
         <SubtaskList subtasks={subtasks} parentTaskId={todoItem.id}/>

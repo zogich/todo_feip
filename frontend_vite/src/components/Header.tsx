@@ -1,9 +1,10 @@
-import style from './styles/Header.module.css'
+import styles from './styles/Header.module.css'
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import $todoStore from '../stores/todo';
 import {useStore} from "effector-react";
+import {rejectAuthentication} from "../stores/token";
 
 export default function Header(){
     const routeParams = useParams()
@@ -11,6 +12,12 @@ export default function Header(){
     const store = useStore($todoStore)
 
     const [navButton, setNavButton] = useState(<></>)
+
+    function logOut(){
+        localStorage.setItem('refresh', '');
+        localStorage.setItem('access', '');
+        rejectAuthentication();
+    }
 
     useEffect(()=>{
         if (store.current_task){
@@ -26,9 +33,9 @@ export default function Header(){
         }
     }, [routeParams, store.current_task])
     return (
-            <div className={style.cap}>
+            <div className={styles.cap}>
                 {navButton}
-                <button>Logout</button>
+                <button onClick={logOut}>Logout</button>
             </div>
     )
 }

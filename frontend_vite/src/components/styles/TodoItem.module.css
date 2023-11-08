@@ -31,5 +31,11 @@
 }
 .actionBlock{
     display: flex;
-    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+.actionBlock > button{
+    width: 15%;
+    background: none;
+    border: none;
 }

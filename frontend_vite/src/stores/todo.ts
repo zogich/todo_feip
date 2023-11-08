@@ -4,6 +4,7 @@ import Task from "../models/task";
 export const setTodoList = createEvent<Task[]>();
 export const setCurrentTask = createEvent<Task>();
 export const setCurrentSubtasks = createEvent<Task[]>();
+export const setUserId = createEvent<number>();
 
 type TodoStore = {
     user_id: number;
@@ -23,6 +24,8 @@ const todoStore = createStore<TodoStore>({
     state.current_task = task;
 }).on(setCurrentSubtasks, (state, subtasks) =>{
     state.current_subtasks = subtasks;
+}).on(setUserId, (state, id) =>{
+    state.user_id = id
 })
 
 export default todoStore

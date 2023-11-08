@@ -2,14 +2,47 @@
     margin: 20px;
     width: 60%;
 }
+
 .name{
     display: flex;
-    justify-content: center;
-    align-items: center;
     height: 10vh;
-    font-size: 5em;
-    border-bottom: 4px solid white;
+    width: 100%;
+    background: #29262E;
+    margin: 10px 0 10px 0;
+    padding: 10px;
+    color:white;
+    border-radius: 15px;
 }
+
+.name > input[type="checkbox"]{
+  -webkit-appearance: none;
+  appearance: none;
+  /* creating a custom design */
+  width: 9%;
+  margin-right: 5%;
+  border-radius: 15px;
+  outline: none;
+  cursor: pointer;
+  background: #535354;
+}
+
+.name > input[type='checkbox']:checked{
+    background-image: url("../assets/done.svg");
+    background-size: 100% 100%;
+}
+
+.name > input[type="text"]{
+    background: none;
+    font-size: 4em;
+    color: white;
+    width: 70%;
+    border: none;
+}
+
+.name > input[type="text"]:focus{
+    outline: none;
+}
+
 .description{
     display: flex;
     background: rgba(255, 255, 255, 0.1);
@@ -17,4 +50,21 @@
     padding: 3px 3px 3px 10px;
     margin-top: 10px;
     font-size: 2em;
+    width: 100%;
+}
+
+.description {
+    outline: none;
+    border: none;
+    color: white;
+    border-radius: 10px;
+}
+
+.updateButton{
+    background: none;
+    color: white;
+    border: 1px solid white;
+    margin: 10px;
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
 }

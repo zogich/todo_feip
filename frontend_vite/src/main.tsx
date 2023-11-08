@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import TodoList from './components/TodoList.tsx'
 import { listLoader } from "./routes/list";
-import { pageLoader } from "./routes/todopage";
+import { pageLoader, setupApp } from "./routes/todopage";
 import './index.css';
 import TodoPage from './pages/TodoPage.tsx';
 import LoginPage from "./pages/LoginPage";

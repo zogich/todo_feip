@@ -1,0 +1,23 @@
+.listWrapper{
+    display: flex;
+    flex-direction: row;
+    background: rgba(144, 126, 168, 0.4);
+    border-radius: 20px;
+    margin-top: 15px;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.listBody{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.subtodoItem > a{
+    color: white;
+    text-decoration: none;
+    font-size: 2em;
+}
+.createTodo{
+    margin: 30px 5px 0 0;
+}
