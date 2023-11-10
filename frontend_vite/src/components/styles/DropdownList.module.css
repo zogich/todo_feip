@@ -4,6 +4,10 @@
     justify-content: center;
     align-items: center;
 }
+.item > a {
+    color: white;
+    text-decoration: none;
+}
 .dropdownButton{
     width: 5%;
     min-width: 30px;

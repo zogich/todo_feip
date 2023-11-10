@@ -1,8 +1,7 @@
 import {useState} from "react";
 import api from "../api";
 import { acceptAuthentication } from "../stores/token";
-import $tokenStore from "../stores/token"
-import { useStore } from "effector-react";
+import styles from "./styles/LoginPage.module.css"
 import { useNavigate } from "react-router-dom";
 
 function LoginPage(){
@@ -31,9 +30,11 @@ function LoginPage(){
     }
 
     return <>
+        <div className={styles.loginPage}>
         <input type={"text"} value={login} onChange={handleChangeLogin}/>
         <input type={"password"} value={password} onChange={handleChangePassword}/>
         <button onClick={logIn}>Войти</button>
+            </div>
     </>
 
 }

@@ -1,5 +1,6 @@
 import {useState} from "react";
 import api from "../api";
+import styles from "./styles/RegisterPage.module.css"
 
 function RegisterPage(){
 
@@ -24,9 +25,11 @@ function RegisterPage(){
     }
 
     return <>
+        <div className={styles.registerPage}>
         <input type={"text"} value={login} onChange={handleChangeLogin}/>
         <input type={"password"} value={password} onChange={handleChangePassword}/>
         <button onClick={signUP}>Зарегистрироваться</button>
+        </div>
     </>
 }
 
