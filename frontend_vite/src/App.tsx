@@ -1,6 +1,6 @@
 import './App.css'
 import './components/TodoList.tsx'
-import { Outlet, redirect, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Header from "./components/Header";
 import {useStore} from "effector-react";
 import { useEffect, useState } from "react";
@@ -30,6 +30,7 @@ function App() {
                 return;
             }
         ).catch(error => {
+                console.log(error)
                 navigate('/')
                 return
             })

@@ -1,6 +1,5 @@
 import axios from "axios";
-import $tokenStore from "./stores/token"
-import {acceptAuthentication, rejectAuthentication} from "./stores/token";
+import {rejectAuthentication} from "./stores/token";
 
 const BASE_URL = "http://localhost:3000";
 
@@ -28,9 +27,10 @@ api.interceptors.request.use(async config => {
     await axios.post(
       'auth/verify',
       { token: (localStorage.getItem('access')) }
-    ).then(response => {
+    ).then(() => {
+
       config.headers['Authorization'] = 'Bearer ' + (localStorage.getItem('access'));
-    }).catch(error => {
+    }).catch(() => {
       localStorage.setItem('access', '');
     });
 
@@ -44,7 +44,7 @@ api.interceptors.request.use(async config => {
         localStorage.setItem('access', response.data.access);
         config.headers['Authorization'] = 'Bearer ' + (localStorage.getItem('access'));
       }
-    ).catch(error => {
+    ).catch(() => {
       localStorage.setItem('refresh', '');
       rejectAuthentication();
 

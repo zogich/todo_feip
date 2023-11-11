@@ -1,5 +1,5 @@
 import styles from './styles/Header.module.css'
-import { redirect, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import $todoStore, {setCurrentTask} from '../stores/todo';

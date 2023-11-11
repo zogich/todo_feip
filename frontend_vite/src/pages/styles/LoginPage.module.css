@@ -12,3 +12,7 @@
 .loginPage > button{
     margin-top: 10px;
 }
+.loginPage > a{
+    color: white;
+    text-decoration: none;
+}

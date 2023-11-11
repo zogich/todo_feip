@@ -2,15 +2,11 @@ import {useState} from "react";
 import api from "../api";
 import { acceptAuthentication } from "../stores/token";
 import styles from "./styles/LoginPage.module.css"
-import { useNavigate } from "react-router-dom";
-import { useStore } from "effector-react";
-import tokenStore from "../stores/token";
+import { Link } from "react-router-dom";
 
 function LoginPage(){
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
-    const navigate = useNavigate();
-    const store = useStore(tokenStore);
 
     function handleChangeLogin(e){
         setLogin(e.target.value)
@@ -46,6 +42,7 @@ function LoginPage(){
         <input type={"text"} value={login} onChange={handleChangeLogin}/>
         <input type={"password"} value={password} onChange={handleChangePassword}/>
         <button onClick={logIn}>Войти</button>
+         <Link to={"/register"}>Зарегистрироваться</Link>
             </div>
     </>
 

@@ -1,6 +1,5 @@
-import { createStore, createEvent, createEffect } from "effector";
+import { createStore, createEvent } from "effector";
 import User from "../models/user";
-import api from "../api";
 
 type TokenStore = {
     isAuthenticated: boolean;

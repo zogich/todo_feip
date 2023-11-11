@@ -1,4 +1,3 @@
-import { useLoaderData } from "react-router-dom";
 import Task from "../models/task.ts"
 import styles from './styles/TodoPage.module.css'
 import SubtaskList from '../components/SubtaskList.tsx'

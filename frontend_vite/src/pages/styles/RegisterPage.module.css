@@ -14,3 +14,8 @@
 .registerPage > button {
     margin-top: 10px;
 }
+
+.registerPage > a{
+    color: white;
+    text-decoration: none;
+}

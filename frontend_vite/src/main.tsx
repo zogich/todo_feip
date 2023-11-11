@@ -4,7 +4,6 @@ import App from './App.tsx'
 import TodoList from './components/TodoList.tsx'
 import './index.css';
 import TodoPage from './pages/TodoPage.tsx';
-import LoginPage from "./pages/LoginPage";
 
 import {
   createBrowserRouter,

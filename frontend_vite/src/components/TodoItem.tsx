@@ -14,10 +14,7 @@ function TodoItem(prop: { taskProp: Task }){
     async function handleUpdStatus(){
         const currentIdDone = isDone
         setIsDone(!isDone)
-        await api.patch(`/api/todo/${prop.taskProp.id}`, {...prop.taskProp, isDone: !currentIdDone}).then(
-            response => {
-            }
-        ).catch(error => console.log(error))
+        await api.patch(`/api/todo/${prop.taskProp.id}`, {...prop.taskProp, isDone: !currentIdDone}).catch(error => console.log(error))
     }
 
     async function deleteTask(){
