@@ -8,6 +8,7 @@ export const setCurrentTask = createEvent<Task>();
 export const setCurrentSubtasks = createEvent<Task[]>();
 export const setUserId = createEvent<number>();
 export const createNewTask = createEvent();
+export const removeTask = createEvent();
 
 
 type TodoStore = {

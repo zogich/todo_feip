@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import DropDownList from  './DropdownList.tsx'
 import {Link} from "react-router-dom";
 import api from "../api";
+import { removeTask } from "../stores/todo";
 
 function TodoItem(prop: { taskProp: Task }){
 
@@ -21,6 +22,7 @@ function TodoItem(prop: { taskProp: Task }){
 
     async function deleteTask(){
         await api.delete(`api/todo/${prop.taskProp.id}`)
+        removeTask(prop.taskProp.id)
     }
 
     async function getSubtasks(){

@@ -11,6 +11,10 @@ function TodoList(){
     const todoStore = useStore($todoStore)
     const [todoList, setList] = useState([])
 
+    removeTask.watch((task_id) =>{
+        setList(todoList.filter(element => element.id != task_id))
+    })
+
     setTodoList.watch(()=>{
         setList(todoStore.todo_list)
     })
