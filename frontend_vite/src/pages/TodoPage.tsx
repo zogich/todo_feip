@@ -39,10 +39,6 @@ export default function TodoPage(){
         getSubtaskList();
     }, [routeParams])
 
-
-
-
-
     function handleChangeName(e){
         setEditTodoItem({...editTodoItem, name: e.target.value})
     }
@@ -55,7 +51,7 @@ export default function TodoPage(){
     }
 
     async function updTask(){
-        updateTask(todoItem)
+        updateTask(editTodoItem)
         setTodoItem({...editTodoItem})
 
     }

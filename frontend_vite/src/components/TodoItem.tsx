@@ -19,9 +19,6 @@ function TodoItem(prop: { taskProp: Task }){
     }
 
     updateTask.watch((task)=>{
-        if ({...task} == {...prop.taskProp}){
-            setIsDone(!isDone)
-        }
     })
 
     async function deleteTask(){
