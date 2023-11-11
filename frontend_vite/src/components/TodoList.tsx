@@ -4,7 +4,7 @@ import styles from './styles/TodoList.module.css'
 import { useLoaderData } from "react-router-dom";
 import CreateTodoComponent from "./CreateTodoComponent";
 import { useList, useStore } from "effector-react";
-import $todoStore, { setTodoList, setCurrentTask } from "../stores/todo";
+import $todoStore, { setTodoList, setCurrentTask, createNewTask } from "../stores/todo";
 import { useEffect, useState } from "react";
 
 function TodoList(){
@@ -13,6 +13,10 @@ function TodoList(){
 
     setTodoList.watch(()=>{
         setList(todoStore.todo_list)
+    })
+
+    createNewTask.watch((newTask)=>{
+       setTodoList([...todoList, newTask])
     })
 
     useEffect(()=>{

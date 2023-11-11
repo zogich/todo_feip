@@ -6,33 +6,39 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import api from "../api";
 import { setCurrentTask } from "../stores/todo";
+import {createNewTask} from "../stores/todo";
 
 export default function TodoPage(){
     const routeParams = useParams();
-    const [todoItem, setTodoItem]: Task = useState({})
+    const [todoItem, setTodoItem]: Task = useState({});
+    const [editTodoItem, setEditTodoItem]: Task = useState({});
+    const [subtasks, setSubtasks]: Task = useState([]);
+
+    createNewTask.watch((newSubtask)=>{
+        setSubtasks([...subtasks, newSubtask])
+    })
+
     useEffect(()=>{
         async function getCurrentTask(){
             await api.get(`api/todo/${routeParams.id}`).then(response=>{
-                setTodoItem(response.data)
-                setEditTodoItem(response.data)
-                setCurrentTask(response.data)
+                setTodoItem(response.data);
+                setEditTodoItem(response.data);
+                setCurrentTask(response.data);
             }).catch(error => console.log(error))
         }
 
         async function getSubtaskList(){
             await  api.get('/api/todo/byparent', {params:{parent_id: routeParams.id}}).then(
                 response =>{
-                    setSubtasks(response.data)
+                    setSubtasks(response.data);
                 }
             ).catch(error => console.log(error))
         }
 
-        getCurrentTask()
-        getSubtaskList()
+        getCurrentTask();
+        getSubtaskList();
     }, [routeParams])
 
-    const [editTodoItem, setEditTodoItem]: Task = useState({});
-    const [subtasks, setSubtasks]: Task = useState([]);
 
 
 

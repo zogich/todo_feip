@@ -3,6 +3,7 @@ import api from "../api";
 import styles from "./styles/CreateTodoComponent.module.css"
 import $tokenStore from "../stores/token";
 import { useStore } from "effector-react";
+import {createNewTask} from "../stores/todo";
 
 function CreateTodoComponent({parent_task = null}){
     const [ todoName, setName ]= useState('');
@@ -13,7 +14,9 @@ function CreateTodoComponent({parent_task = null}){
     function handleSubmit(){
         api.post('/api/todo', {name: todoName, description: todoDescription,
                 parentTask: parent_task, user: tokenStore.user?.id},
-            ).catch(error => console.log(error))
+            ).then(response =>{
+                createNewTask(response.data)
+        }).catch(error => console.log(error))
     }
     function handleChangeName(e){
         setName(e.target.value)
