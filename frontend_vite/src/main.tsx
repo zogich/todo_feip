@@ -27,7 +27,6 @@ const router = createBrowserRouter([
       {
         path: "/item/:id",
         element: <TodoPage/>,
-        loader: pageLoader
       }
     ]
   },
@@ -35,10 +34,6 @@ const router = createBrowserRouter([
     path: "/register",
     element: <RegisterPage/>
   },
-  {
-    path: "/login",
-    element: <LoginPage/>
-  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
