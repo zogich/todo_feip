@@ -23,7 +23,6 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <TodoList/>,
-        loader: listLoader
       },
       {
         path: "/item/:id",
