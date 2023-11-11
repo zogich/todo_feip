@@ -4,7 +4,7 @@ import styles from './styles/TodoList.module.css'
 import { useLoaderData } from "react-router-dom";
 import CreateTodoComponent from "./CreateTodoComponent";
 import { useList, useStore } from "effector-react";
-import $todoStore, { setTodoList, setCurrentTask, createNewTask } from "../stores/todo";
+import $todoStore, { setTodoList, setCurrentTask, createNewTask, removeTask } from "../stores/todo";
 import { useEffect, useState } from "react";
 
 function TodoList(){
@@ -16,7 +16,11 @@ function TodoList(){
     })
 
     createNewTask.watch((newTask)=>{
-       setTodoList([...todoList, newTask])
+        const task: Task = newTask as Task;
+        if (task.parentTask){
+            return;
+        }
+       setTodoList([...todoList, task])
     })
 
     useEffect(()=>{
