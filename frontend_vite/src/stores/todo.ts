@@ -8,7 +8,8 @@ export const setCurrentTask = createEvent<Task>();
 export const setCurrentSubtasks = createEvent<Task[]>();
 export const setUserId = createEvent<number>();
 export const createNewTask = createEvent();
-export const removeTask = createEvent();
+export const removeTask = createEvent<number>();
+export const updateTask = createEvent<Task>();
 
 
 type TodoStore = {
@@ -39,6 +40,17 @@ const todoStore = createStore<TodoStore>({
     state.current_subtasks = subtasks;
 }).on(setUserId, (state, id) =>{
     state.user_id = id
+}).on(removeTask, (state, taskId) =>{
+    async function deleteTask(){
+        await api.delete(`api/todo/${taskId}`)
+    }
+    deleteTask()
+}).on(updateTask, (state, task) =>{
+    task.isDone = !task.isDone
+    async function patchTask() {
+        await api.patch(`/api/todo/${task.id}`, { ...task })
+    }
+    patchTask();
 })
 
 export default todoStore

@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import api from "../api";
 import { setCurrentTask } from "../stores/todo";
 import {createNewTask} from "../stores/todo";
+import { updateTask } from "../stores/todo";
 
 export default function TodoPage(){
     const routeParams = useParams();
@@ -53,11 +54,8 @@ export default function TodoPage(){
         setEditTodoItem({...editTodoItem, isDone: !editTodoItem.isDone})
     }
 
-    async function updateTask(){
-        //todoItem dont change
-        await api.patch(`/api/todo/${todoItem.id}`, {...editTodoItem}).then(response =>{
-            console.log(response.data)
-        })
+    async function updTask(){
+        updateTask(todoItem)
         setTodoItem({...editTodoItem})
 
     }
@@ -65,7 +63,7 @@ export default function TodoPage(){
     function isChanged(){
         if (  todoItem.name != editTodoItem.name || todoItem.description != editTodoItem.description
         || todoItem.isDone != editTodoItem.isDone){
-            return <button className={styles.updateButton} onClick={updateTask}>Update</button>
+            return <button className={styles.updateButton} onClick={updTask}>Update</button>
         }
         return null
     }

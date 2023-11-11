@@ -8,6 +8,7 @@ type TokenStore = {
 export const userSetted = createEvent()
 export const acceptAuthentication = createEvent<User>();
 export const rejectAuthentication = createEvent();
+export const updateTask = createEvent();
 
 const tokenStore = createStore<TokenStore>({
     isAuthenticated: false,

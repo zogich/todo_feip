@@ -4,10 +4,11 @@ import { useState, useEffect } from 'react'
 import DropDownList from  './DropdownList.tsx'
 import {Link} from "react-router-dom";
 import api from "../api";
-import { removeTask } from "../stores/todo";
+import { removeTask, updateTask } from "../stores/todo";
 
 function TodoItem(prop: { taskProp: Task }){
 
+    const [taskState, setTaskState] = useState(prop.taskProp)
     const [subtasks, setSubtasks] = useState([]);
     const [isDone, setIsDone] = useState(prop.taskProp.isDone)
 
@@ -17,8 +18,13 @@ function TodoItem(prop: { taskProp: Task }){
         await api.patch(`/api/todo/${prop.taskProp.id}`, {...prop.taskProp, isDone: !currentIdDone}).catch(error => console.log(error))
     }
 
+    updateTask.watch((task)=>{
+        if ({...task} == {...prop.taskProp}){
+            setIsDone(!isDone)
+        }
+    })
+
     async function deleteTask(){
-        await api.delete(`api/todo/${prop.taskProp.id}`)
         removeTask(prop.taskProp.id)
     }
 
@@ -34,7 +40,7 @@ function TodoItem(prop: { taskProp: Task }){
         <div className={styles.card}>
             <div className={styles.taskDetails}>
                 <div className={styles.nameWithAccessButton}>
-                    <input type={"checkbox"} checked={isDone} onChange={handleUpdStatus} />
+                    <input type={"checkbox"} defaultChecked={isDone} onChange={handleUpdStatus} />
                     <Link to={`item/${prop.taskProp.id}`}>
                         <div>{prop.taskProp.name}</div>
                     </Link>

@@ -27,13 +27,7 @@ export class AuthService {
   }
 
   verifyToken(token: string){
-    let verify;
-    try {
-      verify = this.jwtService.verify(token)
-      return verify
-    }catch (error){
-      return error
-    }
+    return this.jwtService.verify(token)
   }
 
   async refresh(user: any) {
