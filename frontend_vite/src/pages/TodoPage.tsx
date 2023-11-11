@@ -9,22 +9,31 @@ import { setCurrentTask } from "../stores/todo";
 
 export default function TodoPage(){
     const routeParams = useParams();
+    const [todoItem, setTodoItem]: Task = useState({})
+    useEffect(()=>{
+        async function getCurrentTask(){
+            await api.get(`api/todo/${routeParams.id}`).then(response=>{
+                setTodoItem(response.data)
+                setEditTodoItem(response.data)
+                setCurrentTask(response.data)
+            }).catch(error => console.log(error))
+        }
 
-    let todoItem: Task = useLoaderData() as Task;
-    setCurrentTask(todoItem)
+        async function getSubtaskList(){
+            await  api.get('/api/todo/byparent', {params:{parent_id: routeParams.id}}).then(
+                response =>{
+                    setSubtasks(response.data)
+                }
+            ).catch(error => console.log(error))
+        }
 
-    const [editTodoItem, setEditTodoItem]: Task = useState(todoItem);
+        getCurrentTask()
+        getSubtaskList()
+    }, [routeParams])
+
+    const [editTodoItem, setEditTodoItem]: Task = useState({});
     const [subtasks, setSubtasks]: Task = useState([]);
 
-    useEffect( () =>{
-        const fetchData = async () =>{
-            const response_subtasks = await api.get('/api/todo/byparent', {params:{parent_id: routeParams.id}})
-            setSubtasks(response_subtasks.data)
-            setEditTodoItem(todoItem)
-        }
-        fetchData();
-
-    }, [routeParams, todoItem])
 
 
 
@@ -44,7 +53,7 @@ export default function TodoPage(){
         await api.patch(`/api/todo/${todoItem.id}`, {...editTodoItem}).then(response =>{
             console.log(response.data)
         })
-        todoItem = {...editTodoItem}
+        setTodoItem({...editTodoItem})
 
     }
 
