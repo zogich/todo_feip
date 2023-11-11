@@ -1,8 +1,8 @@
 import styles from './styles/Header.module.css'
-import { useParams } from "react-router-dom";
+import { redirect, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import $todoStore from '../stores/todo';
+import $todoStore, {setCurrentTask} from '../stores/todo';
 import {useStore} from "effector-react";
 import {rejectAuthentication} from "../stores/token";
 
@@ -16,6 +16,19 @@ export default function Header(){
     function logOut(){
         rejectAuthentication();
     }
+
+    setCurrentTask.watch(()=>{
+        if (store.current_task) {
+            if (store.current_task?.parentTask) {
+                setNavButton(<Link to={`/item/${store.current_task.parentTask}`}>Назад</Link>)
+            } else {
+                setNavButton(<Link to={`/`}>Назад</Link>)
+            }
+        }
+        else {
+            setNavButton(<></>)
+        }
+    })
 
     useEffect(()=>{
         if (store.current_task){
