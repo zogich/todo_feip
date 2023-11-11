@@ -3,21 +3,29 @@ import TodoItem from  './TodoItem.tsx'
 import styles from './styles/TodoList.module.css'
 import { useLoaderData } from "react-router-dom";
 import CreateTodoComponent from "./CreateTodoComponent";
-import { useStore } from "effector-react";
+import { useList, useStore } from "effector-react";
 import $todoStore, { setTodoList, setCurrentTask } from "../stores/todo";
-
+import { useEffect, useState } from "react";
 
 function TodoList(){
     const todoStore = useStore($todoStore)
-    setTodoList(useLoaderData() as Task[])
+    const [todoList, setList] = useState([])
+
+    setTodoList.watch(()=>{
+        setList(todoStore.todo_list)
+    })
+
+    useEffect(()=>{
+        setList(todoStore.todo_list)
+    }, [])
+
     setCurrentTask(null);
-
-    const items = todoStore.todo_list.map(element => <TodoItem key={element.id} taskProp={element} />)
-
     return <>
         <div>
         <CreateTodoComponent/>
-        <div className={styles.listBody}>{items}</div>
+        <div className={styles.listBody}>{
+            todoList.map(element => <TodoItem key={element.id} taskProp={element} />)
+        }</div>
         </div>
     </>
 }

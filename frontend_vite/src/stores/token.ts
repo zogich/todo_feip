@@ -1,18 +1,27 @@
-import { createStore, createEvent } from "effector";
+import { createStore, createEvent, createEffect } from "effector";
+import User from "../models/user";
+import api from "../api";
 
 type TokenStore = {
-    isAuthenticated: boolean
+    isAuthenticated: boolean;
+    user: User | null;
 }
-
-export const acceptAuthentication = createEvent<boolean>();
-export const rejectAuthentication = createEvent<boolean>();
+export const userSetted = createEvent()
+export const acceptAuthentication = createEvent<User>();
+export const rejectAuthentication = createEvent();
 
 const tokenStore = createStore<TokenStore>({
-    isAuthenticated: false
-}).on(acceptAuthentication, (state) =>{
+    isAuthenticated: false,
+    user: null
+}).on(acceptAuthentication, (state, user ) =>{
     state.isAuthenticated = true;
+    state.user = user;
+    userSetted(user.id)
 }).on(rejectAuthentication, (state) =>{
+    localStorage.setItem('refresh', '');
+    localStorage.setItem('access', '');
     state.isAuthenticated = false;
+    state.user = null;
 })
 
 export default tokenStore

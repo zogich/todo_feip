@@ -22,7 +22,7 @@ export class AuthService {
     const payload = { username: user.username, sub: user.userId };
     return {
       access: this.jwtService.sign(payload),
-      refresh: this.jwtService.sign(payload, {expiresIn: '7d'})
+      refresh: this.jwtService.sign(payload, {expiresIn: '7d'}),
     };
   }
 

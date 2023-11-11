@@ -4,7 +4,6 @@ import {LocalAuthGuard} from "./local-auth.guard";
 import { JwtAuthGuard } from './jwt-auth.guard';
 import {RefreshJwtGuard} from "./refresh-jwt.guard";
 import { UserService } from "../user/user.service";
-import { use } from "passport";
 import { AuthService } from "./auth.service";
 
 @Controller('auth')
@@ -22,7 +21,7 @@ export class AuthController {
     @UseGuards(JwtAuthGuard)
     @Get('/profile')
     getProfile(@Request() req) {
-        return req.user;
+        return this.userService.getProfile(req.user.username)
     }
 
     @Post('/signup')

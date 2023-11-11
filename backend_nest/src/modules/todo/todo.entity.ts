@@ -6,6 +6,9 @@ export class TodoEntity {
   id: number;
 
   @Column()
+  user: number;
+
+  @Column()
   name: string;
 
   @Column('text', { default: '' })

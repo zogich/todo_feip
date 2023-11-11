@@ -1,15 +1,18 @@
 import { useState } from "react";
 import api from "../api";
 import styles from "./styles/CreateTodoComponent.module.css"
-
+import $tokenStore from "../stores/token";
+import { useStore } from "effector-react";
 
 function CreateTodoComponent({parent_task = null}){
     const [ todoName, setName ]= useState('');
     const [ todoDescription, setDescription ]= useState('');
     const [isOpen, setIsOpen] = useState(false);
+    const tokenStore = useStore($tokenStore)
 
     function handleSubmit(){
-        api.post('/api/todo', {name: todoName, description: todoDescription, parentTask: parent_task},
+        api.post('/api/todo', {name: todoName, description: todoDescription,
+                parentTask: parent_task, user: tokenStore.user?.id},
             ).catch(error => console.log(error))
     }
     function handleChangeName(e){

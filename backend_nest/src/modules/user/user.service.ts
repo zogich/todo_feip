@@ -11,7 +11,12 @@ export class UserService {
   ) {}
 
     async findOneByUsername(username: string){
-        return await this.userRepository.findOneBy({username: username})
+        return await this.userRepository.findOneBy({username: username});
+    }
+
+    async getProfile(username: string){
+        const response = await this.userRepository.findOneBy({username: username});
+        return {id: response?.id, username: response?.username}
     }
 
     async create(payload: {username: string, password: string}){

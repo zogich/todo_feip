@@ -3,11 +3,14 @@ import api from "../api";
 import { acceptAuthentication } from "../stores/token";
 import styles from "./styles/LoginPage.module.css"
 import { useNavigate } from "react-router-dom";
+import { useStore } from "effector-react";
+import tokenStore from "../stores/token";
 
 function LoginPage(){
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const store = useStore(tokenStore);
 
     function handleChangeLogin(e){
         setLogin(e.target.value)
@@ -22,11 +25,20 @@ function LoginPage(){
             response => {
                 localStorage.setItem('access', response.data.access);
                 localStorage.setItem('refresh', response.data.refresh);
-                acceptAuthentication();
             }
         ).catch(
-            error => console.log(error)
+            error => {
+                console.log(error)
+                return;
+            }
         )
+        await api.get('/auth/profile').then(
+            response =>{
+                acceptAuthentication(response.data)
+            }).catch(error => {
+            console.log(error)
+        })
+
     }
 
     return <>

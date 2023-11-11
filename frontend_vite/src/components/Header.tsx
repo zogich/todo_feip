@@ -14,8 +14,6 @@ export default function Header(){
     const [navButton, setNavButton] = useState(<></>)
 
     function logOut(){
-        localStorage.setItem('refresh', '');
-        localStorage.setItem('access', '');
         rejectAuthentication();
     }
 

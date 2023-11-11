@@ -1,10 +1,13 @@
 import { createStore, createEvent } from "effector";
 import Task from "../models/task";
+import {userSetted} from "./token";
+import api from "../api";
 
 export const setTodoList = createEvent<Task[]>();
 export const setCurrentTask = createEvent<Task>();
 export const setCurrentSubtasks = createEvent<Task[]>();
 export const setUserId = createEvent<number>();
+
 
 type TodoStore = {
     user_id: number;
@@ -12,6 +15,14 @@ type TodoStore = {
     current_task: Task | null;
     current_subtasks: Task[];
 }
+
+userSetted.watch(async (user_id) =>{
+            await api.get(`/api/todo/byuser/`, {params:{user_id: user_id}} ).then(
+                response =>{
+                    setTodoList(response.data)
+            }
+
+    )})
 
 const todoStore = createStore<TodoStore>({
     user_id: -1,
