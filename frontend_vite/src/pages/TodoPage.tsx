@@ -14,6 +14,7 @@ export default function TodoPage(){
     const [editTodoItem, setEditTodoItem]: Task = useState({});
     const [subtasks, setSubtasks]: Task = useState([]);
 
+    //! checked if subtask
     createNewTask.watch((newSubtask)=>{
         setSubtasks([...subtasks, newSubtask])
     })
@@ -53,7 +54,6 @@ export default function TodoPage(){
     async function updTask(){
         updateTask(editTodoItem)
         setTodoItem({...editTodoItem})
-
     }
 
     function isChanged(){

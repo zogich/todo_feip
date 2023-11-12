@@ -45,10 +45,9 @@ const todoStore = createStore<TodoStore>({
         await api.delete(`api/todo/${taskId}`)
     }
     deleteTask()
-}).on(updateTask, (state, task) =>{
-    task.isDone = !task.isDone
+}).on(updateTask, (state, patched_task) =>{
     async function patchTask() {
-        await api.patch(`/api/todo/${task.id}`, { ...task })
+        await api.patch(`/api/todo/${patched_task.id}`, { ...patched_task })
     }
     patchTask();
 })

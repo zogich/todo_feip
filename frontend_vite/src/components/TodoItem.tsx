@@ -8,17 +8,23 @@ import { removeTask, updateTask } from "../stores/todo";
 
 function TodoItem(prop: { taskProp: Task }){
 
-    const [taskState, setTaskState] = useState(prop.taskProp)
     const [subtasks, setSubtasks] = useState([]);
     const [isDone, setIsDone] = useState(prop.taskProp.isDone)
+    const [taskName, setTaskName] = useState(prop.taskProp.name)
 
     async function handleUpdStatus(){
-        const currentIdDone = isDone
+        prop.taskProp.isDone = !isDone
         setIsDone(!isDone)
-        await api.patch(`/api/todo/${prop.taskProp.id}`, {...prop.taskProp, isDone: !currentIdDone}).catch(error => console.log(error))
+        updateTask(prop.taskProp)
     }
 
-    updateTask.watch((task)=>{
+    updateTask.watch(async (task)=>{
+        if (prop.taskProp.id === task.id){
+            prop.taskProp.isDone = task.isDone
+            prop.taskProp.name = task.name
+            setIsDone(task.isDone)
+            setTaskName(task.name)
+        }
     })
 
     async function deleteTask(){
@@ -39,7 +45,7 @@ function TodoItem(prop: { taskProp: Task }){
                 <div className={styles.nameWithAccessButton}>
                     <input type={"checkbox"} defaultChecked={isDone} onChange={handleUpdStatus} />
                     <Link to={`item/${prop.taskProp.id}`}>
-                        <div>{prop.taskProp.name}</div>
+                        <div>{taskName}</div>
                     </Link>
                 </div>
                 {subtasks?.length ?

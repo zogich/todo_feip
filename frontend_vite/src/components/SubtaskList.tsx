@@ -14,6 +14,7 @@ function SubtaskList( prop: {subtasks: Task[], parentTaskId}){
     }, [prop.subtasks])
 
     async function updateSubtaskChecked(subtask: Task){
+       subtask.isDone = !subtask.isDone
        updateTask(subtask)
     }
 
@@ -25,6 +26,7 @@ function SubtaskList( prop: {subtasks: Task[], parentTaskId}){
     const list = subtaskState.map(element => <div key={element.id} className={styles.subtodoItem}>
         <input type={"checkbox"} defaultChecked={element.isDone} onChange={() => {
             updateSubtaskChecked(element);
+            console.log(element.isDone)
         }} />
             <Link to={`/item/${element.id}`}>
             {element.name}
