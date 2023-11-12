@@ -5,13 +5,13 @@ import { JwtService } from '@nestjs/jwt';
 @Injectable()
 export class AuthService {
   constructor(
-    private userService: UserService,
-    private jwtService: JwtService
+    private readonly userService: UserService,
+    private readonly jwtService: JwtService,
   ) {}
 
   async validateUser(username: string, pass: string): Promise<any> {
     const user = await this.userService.findOneByUsername(username);
-    if (user && user.password === pass) {
+    if (user != null && user?.password === pass) {
       const { password, ...result } = user;
       return result;
     }
@@ -22,12 +22,12 @@ export class AuthService {
     const payload = { username: user.username, sub: user.userId };
     return {
       access: this.jwtService.sign(payload),
-      refresh: this.jwtService.sign(payload, {expiresIn: '7d'}),
+      refresh: this.jwtService.sign(payload, { expiresIn: '7d' }),
     };
   }
 
-  verifyToken(token: string){
-    return this.jwtService.verify(token)
+  verifyToken(token: string) {
+    return this.jwtService.verify(token);
   }
 
   async refresh(user: any) {
@@ -37,5 +37,5 @@ export class AuthService {
     };
   }
 
-  //BlacklistToken
+  // BlacklistToken
 }

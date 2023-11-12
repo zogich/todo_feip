@@ -6,14 +6,14 @@ import {
   Param,
   Delete,
   Query,
-  Patch, UseGuards, Request,
+  Patch,
+  UseGuards,
+  Request,
 } from '@nestjs/common';
 import { TodoEntity } from './todo.entity';
 import { TodoService } from './todo.service';
 import { type UpdateResult } from 'typeorm';
-import { JwtAuthGuard } from "../auth/jwt-auth.guard";
-import { use } from "passport";
-
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('api/todo')
 export class TodoController {
@@ -37,20 +37,24 @@ export class TodoController {
 
   @UseGuards(JwtAuthGuard)
   @Get('/byuser')
-  async getAllUserTodo(@Query('user_id') user_id): Promise<TodoEntity[]>{
-    if (user_id) {
-      return await this.TodoService.findAllRootTaskByUser(parseInt(user_id))
+  async getAllUserTodo(@Query('user_id') userId): Promise<TodoEntity[]> {
+    if (userId != null) {
+      return await this.TodoService.findAllRootTaskByUser(parseInt(userId));
     }
-    return []
+    return [];
   }
 
   @UseGuards(JwtAuthGuard)
   @Get('/byuserandparent')
-  async getAllUserSubtodo(@Request ()req ,@Query('parent_id') parentId: string): Promise<TodoEntity[]>{
-    return await this.TodoService.findByParentAndUser(parseInt(req.user.id), parseInt(parentId))
+  async getAllUserSubtodo(
+    @Request() req,
+    @Query('parent_id') parentId: string,
+  ): Promise<TodoEntity[]> {
+    return await this.TodoService.findByParentAndUser(
+      parseInt(req.user.id),
+      parseInt(parentId),
+    );
   }
-
-
 
   @UseGuards(JwtAuthGuard)
   @Get(':id')

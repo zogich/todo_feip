@@ -18,12 +18,21 @@ export class TodoService {
     return await this.todoRepository.findBy({ parentTask: IsNull() });
   }
 
-  async findAllRootTaskByUser(user_id: number): Promise<TodoEntity[]>{
-    return await this.todoRepository.findBy({user: user_id, parentTask: IsNull()})
+  async findAllRootTaskByUser(userId: number): Promise<TodoEntity[]> {
+    return await this.todoRepository.findBy({
+      user: userId,
+      parentTask: IsNull(),
+    });
   }
 
-  async findByParentAndUser(user_id: number, parent_id: number): Promise<TodoEntity[]>{
-    return await this.todoRepository.findBy({user: user_id, parentTask: parent_id})
+  async findByParentAndUser(
+    userId: number,
+    parentId: number,
+  ): Promise<TodoEntity[]> {
+    return await this.todoRepository.findBy({
+      user: userId,
+      parentTask: parentId,
+    });
   }
 
   async findByParentId(parentId: number): Promise<TodoEntity[]> {
