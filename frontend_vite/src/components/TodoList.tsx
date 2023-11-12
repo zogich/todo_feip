@@ -34,7 +34,7 @@ function TodoList(){
     return <>
         <div>
         <CreateTodoComponent/>
-        <div className={styles.listBody}>{
+        <div className={styles['list-body']}>{
             todoList.map(element => <TodoItem key={element.id} taskProp={element} />)
         }</div>
         </div>

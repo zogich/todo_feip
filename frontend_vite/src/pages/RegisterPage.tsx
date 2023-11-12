@@ -47,7 +47,7 @@ function RegisterPage(){
     }
 
     return <>
-        <div className={styles.registerPage}>
+        <div className={styles['register-page']}>
         <input type={"text"} value={login} onChange={handleChangeLogin}/>
         <input type={"password"} value={password} onChange={handleChangePassword}/>
         <button onClick={signUP}>Зарегистрироваться</button>

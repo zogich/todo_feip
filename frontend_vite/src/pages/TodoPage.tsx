@@ -59,7 +59,7 @@ export default function TodoPage(){
     function isChanged(){
         if (  todoItem.name != editTodoItem.name || todoItem.description != editTodoItem.description
         || todoItem.isDone != editTodoItem.isDone){
-            return <button className={styles.updateButton} onClick={updTask}>Update</button>
+            return <button className={styles['update-button']} onClick={updTask}>Update</button>
         }
         return null
     }

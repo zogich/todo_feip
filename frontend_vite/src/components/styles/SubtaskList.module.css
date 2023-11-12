@@ -1,27 +1,31 @@
-.listWrapper{
+
+.list-wrapper{
     display: flex;
     flex-direction: row;
-    background: rgba(144, 126, 168, 0.4);
+    background: rgb(144 126 168 / 40%);
     border-radius: 20px;
     margin-top: 15px;
     justify-content: space-between;
     align-items: flex-start;
 }
-.listBody{
+
+.list-body{
     padding: 20px;
     display: flex;
     flex-direction: column;
 }
 
-.subtodoItem > a{
+.subtodo-item > a{
     color: white;
     text-decoration: none;
     font-size: 2em;
 }
-.subtodoItem > button{
+
+.subtodo-item > button{
     background: none;
     border: none;
 }
-.createTodo{
+
+.create-todo{
     margin: 30px 5px 0 0;
 }

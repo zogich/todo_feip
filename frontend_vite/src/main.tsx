@@ -2,7 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import TodoList from './components/TodoList.tsx'
-import './index.css';
 import TodoPage from './pages/TodoPage.tsx';
 
 import {

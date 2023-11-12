@@ -41,8 +41,8 @@ function TodoItem(prop: { taskProp: Task }){
 
     return <>
         <div className={styles.card}>
-            <div className={styles.taskDetails}>
-                <div className={styles.nameWithAccessButton}>
+            <div className={styles['task-details']}>
+                <div className={styles['name-with-access-button']}>
                     <input type={"checkbox"} defaultChecked={isDone} onChange={handleUpdStatus} />
                     <Link to={`item/${prop.taskProp.id}`}>
                         <div>{taskName}</div>
@@ -53,7 +53,7 @@ function TodoItem(prop: { taskProp: Task }){
                     : null}
 
             </div>
-            <div className={styles.actionBlock}>
+            <div className={styles['action-block']}>
                 <button onClick={deleteTask}>
                     <svg width="100%" height="100%" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#ffffff">
 

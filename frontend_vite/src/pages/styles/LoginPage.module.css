@@ -1,4 +1,5 @@
-.loginPage{
+
+.login-page{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -6,13 +7,16 @@
     height: 100vh;
     flex-direction: column;
 }
-.loginPage > input {
+
+.login-page > input {
     margin-top: 10px;
 }
-.loginPage > button{
+
+.login-page > button{
     margin-top: 10px;
 }
-.loginPage > a{
+
+.login-page > a{
     color: white;
     text-decoration: none;
 }

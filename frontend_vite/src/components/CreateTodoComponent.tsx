@@ -27,7 +27,7 @@ function CreateTodoComponent({parent_task = null}){
     }
     let widget;
     if ( isOpen ) {
-        widget =  <div className={styles.componentWrapper}>
+        widget =  <div className={styles['component-wrapper']}>
 
                 <button  onClick={() =>setIsOpen(!isOpen)}>Close</button>
                 <input type={"text"} value={todoName} placeholder={'Имя'} onChange={handleChangeName}/>
@@ -35,7 +35,7 @@ function CreateTodoComponent({parent_task = null}){
                 <button onClick={handleSubmit}>Ok</button>
             </div>
     }
-    const openButton = <div className={styles.componentWrapper}><button onClick={() => setIsOpen(!isOpen)}>Add task</button></div>
+    const openButton = <div className={styles['component-wrapper']}><button onClick={() => setIsOpen(!isOpen)}>Add task</button></div>
 
 
     return isOpen ? widget : openButton

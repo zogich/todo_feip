@@ -23,8 +23,8 @@ function DropdownList(prop: {subtasksProp: Task[]}){
                 {element.name}
             </Link>
         </div>)
-    const openListButton = <button className={styles.dropdownButton} onClick={() =>setValue(!isHidden)}>+</button>
-    return isHidden ? openListButton : <><button className={styles.dropdownButton} onClick={() => setValue(!isHidden)}>-</button> {subtasksList}</>
+    const openListButton = <button className={styles['dropdown-button']} onClick={() =>setValue(!isHidden)}>+</button>
+    return isHidden ? openListButton : <><button className={styles['dropdown-button']} onClick={() => setValue(!isHidden)}>-</button> {subtasksList}</>
 }
 
 export default DropdownList

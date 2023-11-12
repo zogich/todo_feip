@@ -1,14 +1,9 @@
+
 *{
     margin: 0;
 }
+
 body{
-    background: hsla(211, 16%, 26%, 1);
-
-    background: linear-gradient(0deg, hsla(211, 16%, 26%, 1) 0%, hsla(216, 13%, 31%, 1) 30%, hsla(28, 44%, 47%, 1) 100%);
-
-    background: -moz-linear-gradient(0deg, hsla(211, 16%, 26%, 1) 0%, hsla(216, 13%, 31%, 1) 30%, hsla(28, 44%, 47%, 1) 100%);
-
-    background: -webkit-linear-gradient(0deg, hsla(211, 16%, 26%, 1) 0%, hsla(216, 13%, 31%, 1) 30%, hsla(28, 44%, 47%, 1) 100%);
-
+    background: -webkit-linear-gradient(0deg, hsl(211deg 16% 26% / 100%) 0%, hsl(216deg 13% 31% / 100%) 30%, hsl(28deg 44% 47% / 100%) 100%);
     color: white;
 }

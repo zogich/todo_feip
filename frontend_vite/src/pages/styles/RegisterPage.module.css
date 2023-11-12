@@ -1,4 +1,4 @@
-.registerPage{
+.register-page{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -7,15 +7,15 @@
     flex-direction: column;
 }
 
-.registerPage > input{
+.register-page > input{
     margin-top: 10px;
 }
 
-.registerPage > button {
+.register-page > button {
     margin-top: 10px;
 }
 
-.registerPage > a{
+.register-page > a{
     color: white;
     text-decoration: none;
 }

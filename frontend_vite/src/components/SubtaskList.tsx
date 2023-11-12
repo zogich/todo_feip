@@ -23,7 +23,7 @@ function SubtaskList( prop: {subtasks: Task[], parentTaskId}){
         removeTask(subtaskId)
     }
 
-    const list = subtaskState.map(element => <div key={element.id} className={styles.subtodoItem}>
+    const list = subtaskState.map(element => <div key={element.id} className={styles['subtodo-item']}>
         <input type={"checkbox"} defaultChecked={element.isDone} onChange={() => {
             updateSubtaskChecked(element);
         }} />
@@ -42,11 +42,11 @@ function SubtaskList( prop: {subtasks: Task[], parentTaskId}){
 </svg>
             </button>
         </div>)
-    return <div className={styles.listWrapper}>
-        <div className={styles.listBody}>
+    return <div className={styles['list-wrapper']}>
+        <div className={styles['list-body']}>
         {list}
         </div>
-        <div className={styles.createTodo}>
+        <div className={styles['create-todo']}>
         <CreateTodoComponent parent_task={prop.parentTaskId} />
         </div>
     </div>
