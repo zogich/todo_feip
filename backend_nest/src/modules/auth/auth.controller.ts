@@ -32,8 +32,8 @@ export class AuthController {
   }
 
   @Post('/signup')
-  async signUp(@Body() body) {
-    return await this.userService.create(body);
+  async signUp(@Body() body:{username: string, password: string}) {
+    return await this.authService.singUp(body)
   }
 
   @Post('/verify')
