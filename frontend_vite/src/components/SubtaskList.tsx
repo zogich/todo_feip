@@ -1,7 +1,7 @@
 import Task from "../models/task";
 import CreateTodoComponent from "./CreateTodoComponent";
 import { Link } from "react-router-dom";
-import styles from './styles/SubtaskList.module.css'
+import styles from './SubtaskList.module.css'
 import { updateTask } from "../stores/todo";
 import { removeTask } from "../stores/todo";
 import { useEffect, useState } from "react";

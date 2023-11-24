@@ -1,5 +1,5 @@
 import Task from "../models/task.ts"
-import styles from './styles/TodoPage.module.css'
+import styles from './TodoPage.module.css'
 import SubtaskList from '../components/SubtaskList.tsx'
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from "react";

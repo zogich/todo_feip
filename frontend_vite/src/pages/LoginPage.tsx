@@ -1,7 +1,7 @@
 import {useState} from "react";
 import api from "../api";
 import { acceptAuthentication } from "../stores/token";
-import styles from "./styles/LoginPage.module.css"
+import styles from "./LoginPage.module.css"
 import { Link } from "react-router-dom";
 
 function LoginPage(){

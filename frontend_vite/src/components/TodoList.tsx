@@ -1,6 +1,6 @@
 import Task from '../models/task.ts'
 import TodoItem from  './TodoItem.tsx'
-import styles from './styles/TodoList.module.css'
+import styles from './TodoList.module.css'
 import CreateTodoComponent from "./CreateTodoComponent";
 import { useStore } from "effector-react";
 import $todoStore, { setTodoList, setCurrentTask, createNewTask, removeTask } from "../stores/todo";

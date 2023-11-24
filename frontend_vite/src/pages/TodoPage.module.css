@@ -28,7 +28,7 @@
 }
 
 .name > input[type='checkbox']:checked{
-    background-image: url("../../assets/done.svg");
+    background-image: url("../assets/done.svg");
     background-size: 100% 100%;
 }
 

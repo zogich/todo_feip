@@ -1,6 +1,6 @@
 import { useState } from "react";
 import api from "../api";
-import styles from "./styles/CreateTodoComponent.module.css"
+import styles from "./CreateTodoComponent.module.css"
 import $tokenStore from "../stores/token";
 import { useStore } from "effector-react";
 import {createNewTask} from "../stores/todo";

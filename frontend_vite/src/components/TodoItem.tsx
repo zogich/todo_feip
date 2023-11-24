@@ -1,5 +1,5 @@
 import Task from '../models/task.ts'
-import styles from './styles/TodoItem.module.css'
+import styles from './TodoItem.module.css'
 import { useState, useEffect } from 'react'
 import DropDownList from  './DropdownList.tsx'
 import {Link} from "react-router-dom";

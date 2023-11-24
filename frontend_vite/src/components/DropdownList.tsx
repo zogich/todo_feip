@@ -1,7 +1,7 @@
 import Task from "../models/task";
 import { useState } from 'react'
 import { Link } from "react-router-dom";
-import styles from "./styles/DropdownList.module.css"
+import styles from "./DropdownList.module.css"
 import api from "../api";
 
 function DropdownList(prop: {subtasksProp: Task[]}){
