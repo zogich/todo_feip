@@ -39,8 +39,8 @@ function LoginPage(){
 
     return <>
         <div className={styles['login-page']}>
-        <input type={"text"} value={login} onChange={handleChangeLogin}/>
-        <input type={"password"} value={password} onChange={handleChangePassword}/>
+        <input type={"text"} value={login} onChange={handleChangeLogin} placeholder={'Введите логин'}/>
+        <input type={"password"} value={password} onChange={handleChangePassword} placeholder={'Введите пароль'}/>
         <button onClick={logIn}>Войти</button>
          <Link to={"/register"}>Зарегистрироваться</Link>
             </div>

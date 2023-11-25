@@ -48,8 +48,8 @@ function RegisterPage(){
 
     return <>
         <div className={styles['register-page']}>
-        <input type={"text"} value={login} onChange={handleChangeLogin}/>
-        <input type={"password"} value={password} onChange={handleChangePassword}/>
+        <input type={"text"} value={login} onChange={handleChangeLogin} placeholder={'Введите логин'}/>
+        <input type={"password"} value={password} onChange={handleChangePassword} placeholder={'Введите пароль'}/>
         <button onClick={signUP}>Зарегистрироваться</button>
             <Link to={'/'}>Назад</Link>
         </div>
