@@ -15,7 +15,9 @@ function CreateTodoComponent({parent_task = null}){
         api.post('/api/todo', {name: todoName, description: todoDescription,
                 parentTask: parent_task, user: tokenStore.user?.id},
             ).then(response =>{
-                createNewTask(response.data)
+                createNewTask(response.data);
+                setName('');
+                setDescription('');
         }).catch(error => console.log(error))
     }
     function handleChangeName(e){
