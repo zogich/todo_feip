@@ -1,6 +1,6 @@
 import { createStore, createEvent, createEffect } from "effector";
 import Task from "../models/task";
-import {userSetted} from "./token";
+import {acceptAuthentication} from "./token";
 import api from "../api";
 
 export const setTodoList = createEvent<Task[]>();
@@ -24,8 +24,8 @@ type TodoStore = {
     current_subtasks: Task[];
 }
 
-userSetted.watch(async (user_id) =>{
-            await api.get(`/api/todo/byuser/`, {params:{user_id: user_id}} ).then(
+acceptAuthentication.watch(async (user) =>{
+            await api.get(`/api/todo/byuser/`, {params:{user_id: user.id}} ).then(
                 response =>{
                     setTodoList(response.data)
             }

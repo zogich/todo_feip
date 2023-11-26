@@ -4,7 +4,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import Header from "./components/Header";
 import {useStore} from "effector-react";
 import { useEffect, useState } from "react";
-import $TokenStore, { acceptAuthentication, userSetted, rejectAuthentication } from "./stores/token";
+import $TokenStore, { acceptAuthentication, rejectAuthentication } from "./stores/token";
 import api from "./api";
 import LoginPage from "./pages/LoginPage";
 
@@ -16,10 +16,10 @@ function App() {
   rejectAuthentication.watch(()=>{
       setIsAuth(tokenStore.isAuthenticated)
       navigate("/")
-  })
+  });
 
-  userSetted.watch(()=>{
-      setIsAuth(tokenStore.isAuthenticated)
+  acceptAuthentication.watch(()=>{
+      setIsAuth(tokenStore.isAuthenticated);
   })
 
   useEffect(() =>{
