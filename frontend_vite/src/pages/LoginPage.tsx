@@ -1,6 +1,6 @@
 import {useState} from "react";
 import api from "../api";
-import { acceptAuthentication } from "../stores/token";
+import { acceptAuthentication, getProfile, getTokens } from "../stores/token";
 import styles from "./LoginPage.module.css"
 import { Link } from "react-router-dom";
 
@@ -16,24 +16,12 @@ function LoginPage(){
         setPassword(e.target.value)
     }
 
+    getTokens.done.watch(async ({result, params}) =>{
+        acceptAuthentication(result);
+    });
+
     async function logIn(){
-        await api.post('/auth/login', {username: login, password: password}).then(
-            response => {
-                localStorage.setItem('access', response.data.access);
-                localStorage.setItem('refresh', response.data.refresh);
-            }
-        ).catch(
-            error => {
-                console.log(error)
-                return;
-            }
-        )
-        await api.get('/auth/profile').then(
-            response =>{
-                acceptAuthentication(response.data)
-            }).catch(error => {
-            console.log(error)
-        })
+        await getTokens({username: login, password: password});
 
     }
 
