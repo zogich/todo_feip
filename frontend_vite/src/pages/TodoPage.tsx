@@ -26,14 +26,6 @@ export default function TodoPage(){
     })
 
     useEffect(()=>{
-        async function getssCurrentTask(){
-            await api.get(`api/todo/${routeParams.id}`).then(response=>{
-                setTodoItem(response.data);
-                setEditTodoItem(response.data);
-                setCurrentTask(response.data);
-            }).catch(error => console.log(error))
-        }
-
 
         async function getSubtaskList(){
             await  api.get('/api/todo/byparent', {params:{parent_id: routeParams.id}}).then(
