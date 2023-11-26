@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import api from "../api";
 import { setCurrentTask } from "../stores/todo";
-import {createNewTask} from "../stores/todo";
+import {createNewTask, getCurrentTask} from "../stores/todo";
 import { updateTask } from "../stores/todo";
 
 export default function TodoPage(){
@@ -19,14 +19,21 @@ export default function TodoPage(){
         setSubtasks([...subtasks, result])
     })
 
+    getCurrentTask.done.watch(async ({result, params}) =>{
+        setTodoItem(result);
+        setEditTodoItem(result);
+        setCurrentTask(result);
+    })
+
     useEffect(()=>{
-        async function getCurrentTask(){
+        async function getssCurrentTask(){
             await api.get(`api/todo/${routeParams.id}`).then(response=>{
                 setTodoItem(response.data);
                 setEditTodoItem(response.data);
                 setCurrentTask(response.data);
             }).catch(error => console.log(error))
         }
+
 
         async function getSubtaskList(){
             await  api.get('/api/todo/byparent', {params:{parent_id: routeParams.id}}).then(
@@ -36,7 +43,7 @@ export default function TodoPage(){
             ).catch(error => console.log(error))
         }
 
-        getCurrentTask();
+        getCurrentTask(routeParams.id);
         getSubtaskList();
     }, [routeParams])
 

@@ -13,6 +13,11 @@ export const createNewTask = createEffect(async (todo) =>{
     return response.data;
 })
 
+export const getCurrentTask = createEffect(async (id) =>{
+    const response = await api.get(`api/todo/${id}`)
+    return response.data;
+})
+
 export const removeTask = createEvent<number>();
 export const updateTask = createEvent<Task>();
 
@@ -30,6 +35,7 @@ acceptAuthentication.watch(async (user) =>{
                     setTodoList(response.data)
             }
     )})
+
 
 const todoStore = createStore<TodoStore>({
     user_id: -1,
