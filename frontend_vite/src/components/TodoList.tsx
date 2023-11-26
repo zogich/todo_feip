@@ -18,8 +18,8 @@ function TodoList(){
         setList(todoStore.todo_list)
     })
 
-    createNewTask.watch((newTask)=>{
-        const task: Task = newTask as Task;
+    createNewTask.done.watch(({result, params})=>{
+        const task: Task = result as Task;
         if (task.parentTask){
             return;
         }

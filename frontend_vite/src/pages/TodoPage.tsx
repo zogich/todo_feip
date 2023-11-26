@@ -15,8 +15,8 @@ export default function TodoPage(){
     const [subtasks, setSubtasks]: Task = useState([]);
 
     //! checked if subtask
-    createNewTask.watch((newSubtask)=>{
-        setSubtasks([...subtasks, newSubtask])
+    createNewTask.done.watch(({result, params})=>{
+        setSubtasks([...subtasks, result])
     })
 
     useEffect(()=>{

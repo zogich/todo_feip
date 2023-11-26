@@ -1,4 +1,4 @@
-import { createStore, createEvent } from "effector";
+import { createStore, createEvent, createEffect } from "effector";
 import Task from "../models/task";
 import {userSetted} from "./token";
 import api from "../api";
@@ -7,7 +7,13 @@ export const setTodoList = createEvent<Task[]>();
 export const setCurrentTask = createEvent<Task>();
 export const setCurrentSubtasks = createEvent<Task[]>();
 export const setUserId = createEvent<number>();
-export const createNewTask = createEvent();
+
+export const createNewTask = createEffect(async (todo) =>{
+    const response = await api.post('/api/todo', todo);
+    return response.data;
+
+})
+
 export const removeTask = createEvent<number>();
 export const updateTask = createEvent<Task>();
 
