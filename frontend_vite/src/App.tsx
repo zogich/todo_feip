@@ -5,7 +5,6 @@ import Header from "./components/Header";
 import {useStore} from "effector-react";
 import { useEffect, useState } from "react";
 import $TokenStore, { acceptAuthentication, getProfile, rejectAuthentication } from "./stores/token";
-import api from "./api";
 import LoginPage from "./pages/LoginPage";
 
 function App() {
