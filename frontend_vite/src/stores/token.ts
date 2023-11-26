@@ -9,6 +9,12 @@ type TokenStore = {
 export const acceptAuthentication = createEvent<User>();
 export const rejectAuthentication = createEvent();
 
+export const registerNewUser = createEffect(async (params) =>{
+    const response = await api.post('/auth/signup', { username: params.username, password: params.password});
+    return response.data;
+});
+
+
 export const getTokens = createEffect(async (params) =>{
     await api.post('/auth/login', {username: params.username, password: params.password}).then(response =>{
          localStorage.setItem('access', response.data.access);
@@ -17,12 +23,6 @@ export const getTokens = createEffect(async (params) =>{
     const response = await api.get('/auth/profile');
     return response.data;
 });
-
-export const getProfile = createEffect(async () =>{
-    const response = await api.get('/auth/profile');
-    return response.data;
-})
-
 
 const tokenStore = createStore<TokenStore>({
     isAuthenticated: false,

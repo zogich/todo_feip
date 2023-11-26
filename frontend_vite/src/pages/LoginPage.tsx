@@ -1,6 +1,5 @@
 import {useState} from "react";
-import api from "../api";
-import { acceptAuthentication, getProfile, getTokens } from "../stores/token";
+import { acceptAuthentication, getTokens } from "../stores/token";
 import styles from "./LoginPage.module.css"
 import { Link } from "react-router-dom";
 

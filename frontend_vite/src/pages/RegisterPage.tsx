@@ -3,7 +3,7 @@ import api from "../api";
 import styles from "./RegisterPage.module.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { acceptAuthentication } from "../stores/token";
+import { acceptAuthentication, getTokens, registerNewUser } from "../stores/token";
 
 function RegisterPage(){
 
@@ -56,40 +56,20 @@ function RegisterPage(){
         return validate;
     }
 
+    registerNewUser.done.watch(async ({result, params}) =>{
+        getTokens({username: login, password: password});
+    })
 
-    async function signUP(){
+    getTokens.done.watch(async ({result, params}) =>{
+        acceptAuthentication(result);
+    })
+
+    async function signUP() {
         const isLoginValid = validateLogin();
-        const isPasswordValid = validatePassword()
-        if ( isLoginValid && isPasswordValid ) {
-
-
-            await api.post('/auth/signup', { username: login, password: password }).then(response => {
-                console.log(response)
-            })
-                .catch(error => {
-                    console.log(error)
-                })
-
-            await api.post('/auth/login', { username: login, password: password }).then(
-                response => {
-                    localStorage.setItem('access', response.data.access);
-                    localStorage.setItem('refresh', response.data.refresh);
-                }
-            ).catch(
-                error => {
-                    console.log(error)
-                    return;
-                }
-            )
-            await api.get('/auth/profile').then(
-                response => {
-                    acceptAuthentication(response.data)
-                }).catch(error => {
-                console.log(error)
-            })
-            navigation('/')
+        const isPasswordValid = validatePassword();
+        if (isLoginValid && isPasswordValid) {
+            await registerNewUser({ username: login, password: password })
         }
-
     }
 
     return <>
