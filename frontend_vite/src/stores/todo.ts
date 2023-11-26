@@ -11,7 +11,6 @@ export const setUserId = createEvent<number>();
 export const createNewTask = createEffect(async (todo) =>{
     const response = await api.post('/api/todo', todo);
     return response.data;
-
 })
 
 export const removeTask = createEvent<number>();
@@ -30,7 +29,6 @@ userSetted.watch(async (user_id) =>{
                 response =>{
                     setTodoList(response.data)
             }
-
     )})
 
 const todoStore = createStore<TodoStore>({

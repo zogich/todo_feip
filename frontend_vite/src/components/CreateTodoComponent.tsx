@@ -1,10 +1,8 @@
 import { useState } from "react";
-import api from "../api";
 import styles from "./CreateTodoComponent.module.css"
 import $tokenStore from "../stores/token";
 import { useStore } from "effector-react";
 import {createNewTask} from "../stores/todo";
-import Task from "../models/task";
 
 function CreateTodoComponent({parent_task = null}){
     const [ todoName, setName ]= useState('');
