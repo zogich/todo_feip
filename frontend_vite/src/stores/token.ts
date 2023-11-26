@@ -10,7 +10,12 @@ export const acceptAuthentication = createEvent<User>();
 export const rejectAuthentication = createEvent();
 
 export const registerNewUser = createEffect(async (params) =>{
-    const response = await api.post('/auth/signup', { username: params.username, password: params.password});
+    await api.post('/auth/signup', { username: params.username, password: params.password});
+     await api.post('/auth/login', {username: params.username, password: params.password}).then(response =>{
+         localStorage.setItem('access', response.data.access);
+         localStorage.setItem('refresh', response.data.refresh);
+    });
+    const response = await api.get('/auth/profile');
     return response.data;
 });
 

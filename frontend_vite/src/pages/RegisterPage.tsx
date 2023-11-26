@@ -57,12 +57,9 @@ function RegisterPage(){
     }
 
     registerNewUser.done.watch(async ({result, params}) =>{
-        getTokens({username: login, password: password});
-    })
-
-    getTokens.done.watch(async ({result, params}) =>{
         acceptAuthentication(result);
     })
+
 
     async function signUP() {
         const isLoginValid = validateLogin();
