@@ -4,7 +4,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import Header from "./components/Header";
 import {useStore} from "effector-react";
 import { useEffect, useState } from "react";
-import $TokenStore, { acceptAuthentication, rejectAuthentication } from "./stores/token";
+import $TokenStore, { acceptAuthentication, getProfile, rejectAuthentication } from "./stores/token";
 import api from "./api";
 import LoginPage from "./pages/LoginPage";
 
@@ -22,20 +22,17 @@ function App() {
       setIsAuth(tokenStore.isAuthenticated);
   })
 
+  getProfile.done.watch(async ({result, params}) =>{
+      acceptAuthentication(result);
+  })
+
+  getProfile.fail.watch(async ({error, params}) =>{
+      console.log(error);
+      navigate('/');
+  })
+
   useEffect(() =>{
-        async function setStore(){
-            await api.get('/auth/profile').then(
-            response => {
-                acceptAuthentication(response.data)
-                return;
-            }
-        ).catch(error => {
-                console.log(error)
-                navigate('/')
-                return
-            })
-        }
-        setStore()
+        getProfile({});
 
   }, [])
 

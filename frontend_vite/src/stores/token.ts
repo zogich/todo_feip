@@ -19,6 +19,10 @@ export const registerNewUser = createEffect(async (params) =>{
     return response.data;
 });
 
+export const getProfile = createEffect(async ({}) =>{
+    const response = await api.get('/auth/profile');
+    return response.data;
+})
 
 export const getTokens = createEffect(async (params) =>{
     await api.post('/auth/login', {username: params.username, password: params.password}).then(response =>{
