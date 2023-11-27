@@ -63,14 +63,21 @@ export default function TodoPage(){
         return null
     }
 
+    function handleSubmit(e) {
+        e.preventDefault();
+        updTask();
+    }
+
 
     return <div className={styles.wrapper}>
+        <form onSubmit={handleSubmit}>
         <div className={styles.name}>
             <input type={"checkbox"} checked={editTodoItem.isDone} onChange={handleChangeIsDone}/>
             <input type={"text"} value={editTodoItem.name} onChange={handleChangeName}/>
         </div>
         <input type={"text"} className={styles.description} value={editTodoItem.description} onChange={handleChangeDescription} />
         {isChanged()}
+        </form>
         <SubtaskList subtasks={subtasks} parentTaskId={todoItem.id}/>
         </div>
 }
