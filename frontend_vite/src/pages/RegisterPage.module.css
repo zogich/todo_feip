@@ -7,11 +7,18 @@
     flex-direction: column;
 }
 
-.register-page > input{
+.register-page > form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.register-page >form > input{
     margin-top: 10px;
 }
 
-.register-page > button {
+.register-page > form > button {
     margin-top: 10px;
 }
 

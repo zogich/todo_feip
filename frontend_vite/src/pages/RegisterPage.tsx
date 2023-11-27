@@ -59,6 +59,11 @@ function RegisterPage(){
         acceptAuthentication(result);
     })
 
+    function handleSubmit(e){
+        e.preventDefault();
+        signUP();
+    }
+
 
     async function signUP() {
         const isLoginValid = validateLogin();
@@ -70,6 +75,7 @@ function RegisterPage(){
 
     return <>
         <div className={styles['register-page']}>
+            <form onSubmit={handleSubmit}>
         <input type={"text"} value={login} onChange={handleChangeLogin} placeholder={'Введите логин'}/>
             {loginErrorMessage}
             {loginLengthMessage}
@@ -77,6 +83,7 @@ function RegisterPage(){
             {passwordErrorMessage}
             {passwordLengthMessage}
         <button onClick={signUP}>Зарегистрироваться</button>
+            </form>
             <Link to={'/'}>Назад</Link>
         </div>
     </>
