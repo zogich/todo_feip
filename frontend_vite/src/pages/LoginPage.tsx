@@ -1,11 +1,11 @@
-import {useState} from "react";
+import { useState } from "react";
 import { acceptAuthentication, getTokens } from "../stores/token";
 import styles from "./LoginPage.module.css"
 import { Link } from "react-router-dom";
 
 function LoginPage(){
-    const [login, setLogin] = useState('')
-    const [password, setPassword] = useState('')
+    const [login, setLogin] = useState('');
+    const [password, setPassword] = useState('');
 
     function handleChangeLogin(e){
         setLogin(e.target.value)
@@ -21,16 +21,21 @@ function LoginPage(){
 
     async function logIn(){
         await getTokens({username: login, password: password});
-
     }
 
+    function handleSubmit(e){
+        e.preventDefault();
+        logIn();
+    }
     return <>
         <div className={styles['login-page']}>
-        <input type={"text"} value={login} onChange={handleChangeLogin} placeholder={'Введите логин'}/>
+            <form onSubmit={handleSubmit}>
+        <input className={styles} type={"text"} value={login} onChange={handleChangeLogin} placeholder={'Введите логин'}/>
         <input type={"password"} value={password} onChange={handleChangePassword} placeholder={'Введите пароль'}/>
         <button onClick={logIn}>Войти</button>
+                </form>
          <Link to={"/register"}>Зарегистрироваться</Link>
-            </div>
+        </div>
     </>
 
 }
