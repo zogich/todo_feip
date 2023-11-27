@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 function LoginPage(){
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
     function handleChangeLogin(e){
         setLogin(e.target.value)
@@ -19,6 +20,12 @@ function LoginPage(){
         acceptAuthentication(result);
     });
 
+    getTokens.fail.watch(async ({error, params}) =>{
+        if (error.code == 'ERR_BAD_REQUEST') {
+            setErrorMessage('Неверный логин или пароль');
+        }
+    })
+
     async function logIn(){
         await getTokens({username: login, password: password});
     }
@@ -29,11 +36,12 @@ function LoginPage(){
     }
     return <>
         <div className={styles['login-page']}>
-            <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
         <input className={styles} type={"text"} value={login} onChange={handleChangeLogin} placeholder={'Введите логин'}/>
         <input type={"password"} value={password} onChange={handleChangePassword} placeholder={'Введите пароль'}/>
+            {errorMessage}
         <button onClick={logIn}>Войти</button>
-                </form>
+        </form>
          <Link to={"/register"}>Зарегистрироваться</Link>
         </div>
     </>
